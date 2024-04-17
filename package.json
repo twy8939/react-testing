@@ -7,7 +7,8 @@
     "start": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "unit-test": "jest --watchAll"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.6",
