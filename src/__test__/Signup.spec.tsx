@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
-import SignupPage from "pages/SignupPage";
-import { QueryClient, QueryClientProvider } from "react-query";
+import SignupPage from "../pages/SignupPage";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
   defaultOptions: {},
