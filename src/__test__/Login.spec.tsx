@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import * as nock from "nock";
 import {
   fireEvent,
   render,
@@ -13,6 +14,10 @@ import useLogin from "../hooks/useLogin";
 const queryClient = new QueryClient({
   defaultOptions: {},
 });
+
+const wrapper = ({ children }) => (
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);
 
 describe("로그인 테스트", () => {
   beforeEach(() => {
@@ -38,9 +43,12 @@ describe("로그인 테스트", () => {
     );
 
     // when - 사용자가 로그인에 실패한다
-    const wrapper = ({ children }) => (
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    );
+    nock("https://inflearn.byeongjinkang.com")
+      .post("/user/login/", {
+        userName: "test@email.com",
+        password: "password1234",
+      })
+      .reply(400, { msg: "NO_SUCH_USER" });
 
     const emailInput = screen.getByLabelText("이메일");
     const passwordInput = screen.getByLabelText("비밀번호");
