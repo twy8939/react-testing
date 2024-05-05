@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import "./button.css";
 import "../App.css";
 
@@ -23,9 +23,6 @@ interface ButtonProps {
    * Optional click handler
    */
   onClick?: () => void;
-  /**
-   * Optional disabled
-   */
   disabled?: boolean;
 }
 
@@ -34,8 +31,8 @@ interface ButtonProps {
  */
 export const Button = ({
   primary = false,
-  disabled = true,
   size = "medium",
+  disabled = true,
   backgroundColor,
   label,
   ...props
