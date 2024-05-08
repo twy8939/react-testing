@@ -17,6 +17,8 @@ describe("회원가입 테스트", () => {
     cy.get("@passwordInput")
       .invoke("val")
       .then((passwordValue) => {
+        cy.get("@passwordInput").should("have.value", passwordValue);
+
         cy.get("@confirmPasswordInput")
           .invoke("val")
           .should("eq", passwordValue);
