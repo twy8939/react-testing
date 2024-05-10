@@ -37,4 +37,22 @@ describe("회원가입 테스트", () => {
     cy.get("@signupButton").click();
     cy.url().should("include", "/login");
   });
+
+  it("비밀번호와 비밀번호 확인값이 일치하지 않는경우 에러메세지가 나타난다", () => {
+    // given - 회원가입 페이지에 접근
+    cy.visit("/signup");
+
+    // when - 비밀번호와 비밀번호 확인에 각각 다른 값이 입력된다
+    cy.get("[data-cy=passwordInput]").as("passwordInput");
+    cy.get("[data-cy=confirmPasswordInput]").as("confirmPasswordInput");
+
+    cy.get("@passwordInput").type("password123");
+    cy.get("@confirmPasswordInput").type("password1234");
+
+    // then - 비밀번호와 비밀번호 확인 불일치 메시지 확인
+    cy.get("[data-testid=error-message]").as("errorMessage");
+    cy.get("@errorMessage")
+      .should("be.visible")
+      .and("contain", "비밀번호가 일치하지 않습니다");
+  });
 });
